@@ -24,6 +24,12 @@
 			<span>Product</span></a>
 	</li>
 
+    <li class="nav-item active">
+		<a class="nav-link" href="<?php echo base_url('store') ;?>">
+			<i class="fas fa-building"></i>
+			<span>Store</span></a>
+	</li>
+
 
 	<!-- Sidebar Toggler (Sidebar) -->
 	<div class="text-center d-none d-md-inline">
