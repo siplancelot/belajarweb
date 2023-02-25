@@ -6,6 +6,10 @@ class Product extends CI_Controller {
   public function __construct(){
 
     parent:: __construct();
+    $this->load->library('session');
+    if (empty($this->session->userdata('Username'))) {
+      redirect('user/login');
+  }
 
     $this->load->model(array('product_model'));
     $this->load->helper(array('form', 'url', 'date'));

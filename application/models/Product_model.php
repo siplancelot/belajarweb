@@ -19,8 +19,7 @@ class Product_model extends CI_Model {
 
   public function delete($id)
   {
-    $this->db->delete('checkouts', array('ProductID' => $id));
-    return $this->db->delete('products', array('ProductID' => $id));
+    return $this->db->update('products', array('IsDeleted' => 1), array('ProductID' => $id));
   }
 
   public function getProductById($id)
