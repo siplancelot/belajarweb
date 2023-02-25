@@ -25,6 +25,9 @@
                     <?php
                         $i = 1;
                         foreach($product as $product) : ?>
+						<?php 
+							if ($product['IsDeleted'] == 0) {
+						?>
                             <tr>
                             <td><?= $i++ ;?></td>
                             <td><?= $product['ProductName'] ;?></td>
@@ -37,6 +40,7 @@
                             <a href="<?php echo base_url().'index.php/Product/delete?id='.$product['ProductID']; ?>" class="btn btn-danger">Hapus</a>
                             </td>
                             </tr>
+						<?php } ?>
                     <?php endforeach ;?>
                     </tbody> 
                 </table>
