@@ -8,7 +8,7 @@ class Home extends CI_Controller {
     parent:: __construct();
 	
     $this->load->model(array('product_model', 'checkout_model'));
-    $this->load->library('form_validation');
+    $this->load->library(array('form_validation', 'session'));
     $this->load->helper(array('form', 'url', 'date'));
   }
 	
@@ -44,11 +44,16 @@ class Home extends CI_Controller {
 
   public function checkout()
 	{
-    if (empty($_FILES['image']['name']))
-    {
-      $this->viewDetail();
+    if (empty($this->session->userdata('Username')) || $this->session->userdata('IsAdmin') == 1) {
+      redirect('user/login');
     }
 
+    if (empty($_FILES['file']['name']))
+    {
+      $id = $this->uri->segment(3);
+      redirect('Home/viewDetail/'.$id);
+    }
+    
     $config = array (
       'upload_path'    => './files/',
       'allowed_types'  => 'jpeg|jpg|png',
@@ -58,13 +63,12 @@ class Home extends CI_Controller {
     $this->load->library('upload', $config);
     // $this->upload->initialize($config);
     
-    if(!$this->upload->do_upload('image')){
-
-      $this->viewDetail();
-
+    if(!$this->upload->do_upload('file')){
+      $id = $this->uri->segment(3);
+      redirect('Home/viewDetail/'.$id);
     } else {
       
-      $this->upload->do_upload('image');
+      $this->upload->do_upload('file');
       $upload_data = $this->upload->data('file_name');
       $id = $this->uri->segment(3);
 
@@ -74,13 +78,11 @@ class Home extends CI_Controller {
         'CreatedAt' => date('Y-m-d H:i:s'),
         'Status' => 0
       );
-
       if ($this->checkout_model->insert($data)) {
         $data1 = array(
           'title' => "Success",
           'page' => 'pages/landing/success'
         );
-
         $this->load->view('theme/landing', $data1);
       } 
     }
