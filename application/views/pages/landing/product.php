@@ -1,5 +1,10 @@
 <div class="container mt-5">
-	<div class="row">
+	<div class="text-center">
+		<h1>Product</h1>
+		<h5>Cari dan dapatkan smartphone impian kamu</h5>
+	</div>
+
+	<div class="row mt-5">
 		<?php foreach($products as $items) : ?>
 			<div class="col-md-3">
 				<div class="card" style="width: 18rem;">
@@ -10,7 +15,7 @@
 							<p><?php echo $items["Category"] ;?></p>
 						</b>
 						<p>Rp <?php echo $items["Price"] ;?></p>
-						<a href="<?= base_url("home/checkout") ;?>" class="btn btn-primary">Pesan</a>
+						<a href="<?= base_url("home/checkout/".$items["ProductID"]) ;?>" class="btn btn-primary">Pesan</a>
 					</div>
 				</div>
 			</div>
