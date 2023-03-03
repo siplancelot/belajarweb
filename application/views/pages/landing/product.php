@@ -15,7 +15,7 @@
 							<p><?php echo $items["Category"] ;?></p>
 						</b>
 						<p>Rp <?php echo $items["Price"] ;?></p>
-						<a href="<?= base_url("home/checkout/".$items["ProductID"]) ;?>" class="btn btn-primary">Pesan</a>
+						<a href="<?= base_url("home/viewDetail/".$items["ProductID"]) ;?>" class="btn btn-primary">Pesan</a>
 					</div>
 				</div>
 			</div>
